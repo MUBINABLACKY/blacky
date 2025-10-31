@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mubina I - Profile Card</title>
+  <style>
+    :root {
+      --bg: #f3f6ff;
+      --card-bg: #ffffff;
+      --accent-1: #3ca89b;
+      --accent-2: #76d1b8;
+      --muted: #7b7f9a;
+      --shadow: 0 10px 30px rgba(33,41,61,0.08);
+      font-family: "Poppins", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: linear-gradient(180deg, #e9f8f5 0%, #f8fbff 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      flex-direction: column;
+    }
+
+    .card {
+      width: min(420px, 92vw);
+      background: var(--card-bg);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 42px rgba(33,41,61,0.12);
+    }
+
+    .cover {
+      height: 120px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      position: relative;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 6px solid var(--card-bg);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -50px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .content {
+      padding: 64px 24px 24px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    p.title {
+      color: var(--accent-1);
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    p.bio {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .stat {
+      background: #f7f8fb;
+      padding: 10px 14px;
+      border-radius: 10px;
+      min-width: 80px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .btn {
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 0;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(60,168,155,0.25);
+      transition: all 0.3s ease;
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--accent-1);
+      border: 1px solid rgba(60,168,155,0.4);
+      box-shadow: none;
+    }
+
+    /* Message box style */
+    .message-box {
+      margin-top: 20px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .message-box textarea {
+      width: 300px;
+      height: 80px;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: none;
+      font-family: inherit;
+    }
+
+    .sent-message {
+      margin-top: 10px;
+      background: #e0f7f1;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 14px;
+      color: #333;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <article class="card">
+    <div class="cover">
+      <div class="avatar">
+        <img src="https://i.imgur.com/Z9va0tT.jpeg" alt="Mubina's Photo">
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>Mubina I</h2>
+      <p class="title">Frontend Developer</p>
+      <p class="bio">Frontend Developers build the parts of a website or app that users see and interact with — like buttons, layouts, and animations.</p>
+      <p class="bio">They use HTML, CSS, and JavaScript to create responsive, attractive, and user-friendly designs that work on all devices.</p>
+
+      <div class="stats">
+        <div class="stat">
+          <strong>1.2k</strong>
+          <span>Followers</span>
+        </div>
+        <div class="stat">
+          <strong>350</strong>
+          <span>Following</span>
+        </div>
+        <div class="stat">
+          <strong>02</strong>
+          <span>Projects</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="followBtn" class="btn">Follow</button>
+        <button id="messageBtn" class="btn secondary">Message</button>
+      </div>
+
+      <!-- Message box (hidden until clicked) -->
+      <div class="message-box" id="messageBox">
+        <textarea id="messageInput" placeholder="Type your message here..."></textarea>
+        <button class="btn" id="sendBtn">Send</button>
+      </div>
+
+      <!-- Sent message display -->
+      <div class="sent-message" id="sentMessage"></div>
+    </div>
+  </article>
+
+  <script>
+    const followBtn = document.getElementById("followBtn");
+    const messageBtn = document.getElementById("messageBtn");
+    const messageBox = document.getElementById("messageBox");
+    const sendBtn = document.getElementById("sendBtn");
+    const sentMessage = document.getElementById("sentMessage");
+    const messageInput = document.getElementById("messageInput");
+
+    // Follow button click
+    followBtn.addEventListener("click", () => {
+      if (followBtn.innerText === "Follow") {
+        followBtn.innerText = "Following ✓";
+        followBtn.style.background = "#ccc";
+      } else {
+        followBtn.innerText = "Follow";
+        followBtn.style.background = "linear-gradient(90deg, #3ca89b, #76d1b8)";
+      }
+    });
+
+    // Message button click
+    messageBtn.addEventListener("click", () => {
+      messageBox.style.display =
+        messageBox.style.display === "flex" ? "none" : "flex";
+    });
+
+    // Send message
+    sendBtn.addEventListener("click", () => {
+      const msg = messageInput.value.trim();
+      if (msg) {
+        sentMessage.innerText = "Message Sent: " + msg;
+        sentMessage.style.display = "block";
+        messageInput.value = "";
+        messageBox.style.display = "none";
+      } else {
+        alert("Please type a message before sending!");
+      }
+    });
+  </script>
+</body>
+</html>
